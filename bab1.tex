@@ -1,0 +1,55 @@
+\chapter{Pendahuluan}
+
+\section{Latar Belakang Masalah}
+
+Dalam era digital yang semakin berkembang pesat, pertukaran informasi melalui aplikasi berbasis API (Application Programming Interface) telah menjadi tulang punggung berbagai layanan dan sistem. API memungkinkan berbagai aplikasi untuk berkomunikasi dan berbagi data secara efisien, memfasilitasi inovasi dan konektivitas. Namun, seiring dengan kemudahan dan kecepatan yang ditawarkan, muncul pula risiko keamanan yang signifikan, terutama serangan Man-in-the-Middle (MitM).
+
+Serangan MitM terjadi ketika pihak ketiga secara diam-diam menyadap, mencegat, dan bahkan memanipulasi data yang dikirimkan antara dua pihak yang berkomunikasi, misalnya antara aplikasi klien dan server API. Pelaku serangan dapat mencuri informasi sensitif seperti kredensial pengguna, data pribadi, atau token akses, yang dapat mengakibatkan kerugian finansial, pelanggaran privasi, dan kerusakan reputasi. Sebagaimana dijelaskan oleh William Stallings dalam \textit{Network Security Essentials}, integritas dan kerahasiaan data selama transmisi adalah fondasi utama keamanan jaringan, dan serangan MitM secara langsung merusak kedua prinsip tersebut.
+
+Banyak sistem saat ini masih mengandalkan mekanisme autentikasi dan otorisasi tradisional yang mungkin rentan terhadap penyadapan jika tidak diimplementasikan dengan lapisan keamanan tambahan yang kuat. Penggunaan token sesi konvensional, misalnya, dapat dieksploitasi jika token tersebut berhasil dicuri oleh penyerang melalui serangan MitM. Oleh karena itu, diperlukan sebuah mekanisme yang tidak hanya memverifikasi identitas pengguna tetapi juga memastikan integritas data yang dikirimkan pada setiap permintaan.
+
+Salah satu solusi modern untuk mengatasi tantangan ini adalah implementasi JSON Web Token (JWT). JWT adalah standar terbuka (RFC 7519) yang mendefinisikan cara yang ringkas dan mandiri (\textit{self-contained}) untuk mentransmisikan informasi secara aman antara berbagai pihak sebagai objek JSON. Keunggulan utama JWT terletak pada kemampuannya untuk ditandatangani secara digital (menggunakan algoritma seperti HMAC atau RSA), sehingga keaslian dan integritasnya dapat diverifikasi oleh penerima. Jika seorang penyerang mencoba memodifikasi data di dalam JWT selama transmisi, tanda tangan digital akan menjadi tidak valid, dan server API dapat langsung menolak permintaan tersebut.
+
+Bahasa pemrograman Golang (Go) semakin populer untuk pengembangan API berkinerja tinggi karena kesederhanaan, efisiensi, dan dukungan konkurensi yang sangat baik. Namun, seperti halnya teknologi lainnya, keamanan aplikasi berbasis Golang sangat bergantung pada implementasi praktik terbaik. Oleh karena itu, penelitian mengenai penerapan JWT pada API yang dibangun menggunakan Golang menjadi relevan untuk memberikan panduan konkret dalam membangun sistem yang aman dan andal.
+
+Oleh karena itu, penulis merancang penelitian ini dengan judul \textbf{``Rancang Bangun Otentikasi Berbasis JWT pada API Golang untuk Mitigasi Man-in-the-Middle''}. Sistem ini diharapkan dapat meningkatkan keamanan komunikasi antara klien dan server melalui otentikasi berbasis JWT, sehingga mencegah intersepsi data sensitif selama transaksi, serta memastikan integritas dan kerahasiaan informasi pada API berbasis Golang.
+
+\section{Rumusan Masalah}
+
+Berdasarkan uraian latar belakang, maka dapat dirumuskan permasalahan sebagai berikut: mengapa serangan Man-in-the-Middle masih dapat terjadi pada komunikasi data melalui API meskipun secara teori keamanan jaringan menuntut terpenuhinya aspek \textit{confidentiality} dan \textit{integrity}, serta bagaimana penerapan JSON Web Token (JWT) pada API berbasis Golang dapat digunakan sebagai mitigasi terhadap serangan tersebut.
+
+\section{Identifikasi Masalah}
+
+Berdasarkan uraian latar belakang, dapat diidentifikasi beberapa permasalahan dalam keamanan komunikasi API berbasis Golang, yaitu sebagai berikut:
+\begin{enumerate}
+  \item Bagaimana serangan Man-in-the-Middle (MitM) dapat mengeksploitasi kelemahan dalam komunikasi API berbasis Golang yang tidak dilengkapi mekanisme otentikasi yang kuat, sehingga mengancam kerahasiaan (\textit{confidentiality}) dan keutuhan (\textit{integrity}) data.
+  \item Bagaimana kelemahan pada mekanisme otentikasi konvensional seperti token statis atau \textit{session-based} memungkinkan penyerang memanfaatkan data yang diintersepsi dalam skenario MitM.
+  \item Bagaimana implementasi JSON Web Token (JWT) dengan fitur tanda tangan digital, masa berlaku (\textit{expiry time}), dan validasi token dapat memperkuat otentikasi dan mengurangi risiko akses tidak sah pada API berbasis Golang.
+  \item Sejauh mana penerapan JWT berkontribusi dalam memitigasi dampak serangan MitM terhadap keamanan transaksi API, khususnya dalam mencegah penyalahgunaan sesi oleh pihak tidak berwenang.
+\end{enumerate}
+
+\section{Maksud dan Tujuan Penelitian}
+
+\subsection{Maksud}
+
+Maksud dari penelitian ini adalah untuk merancang dan membangun sistem API berbasis Golang yang dilengkapi mekanisme otentikasi berbasis JSON Web Token (JWT) sebagai upaya mitigasi terhadap serangan Man-in-the-Middle (MitM). Melalui penelitian ini, diharapkan dapat dikembangkan sebuah arsitektur API yang mampu mengautentikasi pengguna secara aman, memvalidasi integritas token, dan mencegah penyalahgunaan sesi oleh pihak tidak berwenang, meskipun komunikasi data diintersepsi.
+
+\subsection{Tujuan}
+
+Adapun tujuan dari penelitian ini adalah sebagai berikut:
+\begin{enumerate}[label=\alph*.]
+  \item Merancang arsitektur keamanan API berbasis Golang yang mengintegrasikan mekanisme otentikasi berbasis JSON Web Token (JWT).
+  \item Membangun sistem API dengan Golang yang menerapkan JWT dengan fitur tanda tangan digital, masa berlaku token, serta pencegahan serangan \textit{replay}.
+  \item Mengurangi risiko akses tidak sah terhadap endpoint API akibat intersepsi data dalam skenario serangan Man-in-the-Middle.
+  \item Meningkatkan tingkat keamanan dan keandalan komunikasi API dengan memastikan hanya pengguna bertoken sah yang dapat mengakses sumber daya sistem.
+\end{enumerate}
+
+\section{Kegunaan Penelitian}
+
+\subsection{Kegunaan Ilmiah}
+
+Penelitian ini diharapkan dapat memperkaya wawasan dan literatur akademik di bidang Teknik Informatika, khususnya terkait pengembangan sistem API yang aman dan andal melalui penerapan JSON Web Token (JWT) sebagai mekanisme otentikasi untuk mitigasi serangan Man-in-the-Middle.
+
+\subsection{Kegunaan Terapan}
+
+Penelitian ini diharapkan dapat memberikan solusi teknis yang dapat diterapkan secara langsung oleh pengembang sistem dalam membangun API yang aman, khususnya untuk layanan digital yang menangani data sensitif, dengan menerapkan JWT yang dilengkapi tanda tangan digital dan mekanisme validasi yang ketat.
