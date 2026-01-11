@@ -1,3 +1,4 @@
+
 \documentclass[12pt,oneside]{book}
 
 %------------------------------------------------
@@ -44,17 +45,29 @@
   {0pt}{0pt}{20pt}
 
 \setcounter{secnumdepth}{3}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
 
 %------------------------------------------------
 \begin{document}
+% --------- halaman awal (kosong dulu) ----------
+\frontmatter
+% nanti: cover, abstrak, kata pengantar
 
-\chapter{Pendahuluan}
-\section{Latar Belakang}
-Isi skripsi mulai di sini.
+\tableofcontents
+\clearpage
 
-\subsection{Rumusan Masalah}
-Isi sub-sub-bab.
+% --------- isi skripsi ----------
+\mainmatter
 
-\chapter{Tinjauan Pustaka}
+\include{bab1}
+\include{bab2}
+\include{bab3}
+
+% --------- bagian akhir ----------
+\backmatter
+% daftar pustaka, lampiran
 
 \end{document}
+
+
