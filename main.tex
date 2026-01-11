@@ -1,0 +1,60 @@
+\documentclass[12pt,oneside]{book}
+
+%------------------------------------------------
+% Font (LuaLaTeX)
+%------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+%------------------------------------------------
+% Bahasa Indonesia
+%------------------------------------------------
+\usepackage[indonesian]{babel}
+
+%------------------------------------------------
+% Margin
+%------------------------------------------------
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=4cm,
+  top=4cm,
+  bottom=3cm,
+  right=3cm
+}
+
+%------------------------------------------------
+% Spasi 1.5
+%------------------------------------------------
+\usepackage{setspace}
+\onehalfspacing
+
+%------------------------------------------------
+% BAB formatting
+%------------------------------------------------
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering}
+  {BAB \Roman{chapter}}
+  {0pt}
+  {\Large}
+
+\titlespacing*{\chapter}
+  {0pt}{0pt}{20pt}
+
+\setcounter{secnumdepth}{3}
+
+%------------------------------------------------
+\begin{document}
+
+\chapter{Pendahuluan}
+\section{Latar Belakang}
+Isi skripsi mulai di sini.
+
+\subsection{Rumusan Masalah}
+Isi sub-sub-bab.
+
+\chapter{Tinjauan Pustaka}
+
+\end{document}
