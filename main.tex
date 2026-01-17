@@ -1,17 +1,13 @@
-
 \documentclass[12pt,oneside]{book}
-
 %------------------------------------------------
 % Font (LuaLaTeX)
 %------------------------------------------------
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-
 %------------------------------------------------
 % Bahasa Indonesia
 %------------------------------------------------
 \usepackage[indonesian]{babel}
-
 %------------------------------------------------
 % Margin
 %------------------------------------------------
@@ -23,42 +19,86 @@
   bottom=3cm,
   right=3cm
 }
-
+\usepackage{enumitem}
 %------------------------------------------------
 % Spasi 1.5
 %------------------------------------------------
 \usepackage{setspace}
 \onehalfspacing
-
 %------------------------------------------------
 % BAB formatting
 %------------------------------------------------
 \usepackage{titlesec}
-
 \titleformat{\chapter}[display]
   {\normalfont\bfseries\centering}
-  {BAB \Roman{chapter}}
+  {\fontsize{18}{22}\selectfont BAB \Roman{chapter}}
   {0pt}
-  {\Large}
-
+  {\Large\MakeUppercase}
 \titlespacing*{\chapter}
   {0pt}{0pt}{20pt}
+
+% Format untuk subsection (1.1, 1.2) - no indent
+\titleformat{\subsection}
+  {\normalfont\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
 
 \setcounter{secnumdepth}{3}
 \usepackage{indentfirst}
 \setlength{\parindent}{1.25cm}
+%------------------------------------------------
+% Page numbering - PERBAIKAN
+%------------------------------------------------
+\usepackage{fancyhdr}
 
+% Style untuk halaman biasa di mainmatter
+\fancypagestyle{mainbody}{
+  \fancyhf{}
+  \fancyfoot[R]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Style untuk halaman awal bab
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Style untuk frontmatter
+\fancypagestyle{front}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+%------------------------------------------------
+% Untuk gambar dan tabel
+%------------------------------------------------
+\usepackage{graphicx}
+\usepackage{caption}
 %------------------------------------------------
 \begin{document}
-% --------- halaman awal (kosong dulu) ----------
+% --------- halaman awal ----------
 \frontmatter
-% nanti: cover, abstrak, kata pengantar
+\pagestyle{front}
+
+% Cover
+% Lembar Pengesahan
+% Abstrak
+% Kata Pengantar
 
 \tableofcontents
-\clearpage
+\listoffigures
+\listoftables
 
 % --------- isi skripsi ----------
+\clearpage
 \mainmatter
+\pagestyle{mainbody}
 
 \include{bab1}
 \include{bab2}
@@ -66,8 +106,9 @@
 
 % --------- bagian akhir ----------
 \backmatter
-% daftar pustaka, lampiran
+\pagestyle{mainbody}
+
+% Daftar Pustaka
+% Lampiran
 
 \end{document}
-
-
