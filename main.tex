@@ -20,6 +20,7 @@
   right=3cm
 }
 \usepackage{enumitem}
+\usepackage{changepage}
 %------------------------------------------------
 % Spasi 1.5
 %------------------------------------------------
@@ -37,16 +38,25 @@
 \titlespacing*{\chapter}
   {0pt}{0pt}{20pt}
 
-% Format untuk subsection (1.1, 1.2) - no indent
+% UBAH FORMAT SUBSECTION - tambahkan indentasi
 \titleformat{\subsection}
   {\normalfont\bfseries}
-  {\thesubsection}
+  {\hspace{1cm}\thesubsection} % Tambah \hspace{1cm}
   {1em}
   {}
 
 \setcounter{secnumdepth}{3}
 \usepackage{indentfirst}
 \setlength{\parindent}{1.25cm}
+
+% TAMBAHKAN: Environment untuk indent content subsection
+\newenvironment{subsectioncontent}{%
+  \begin{adjustwidth}{1cm}{}%
+  \parindent=1.25cm%
+  \noindent\hspace{\parindent}\ignorespaces% Paksa indent di awal
+}{%
+  \end{adjustwidth}%
+}
 %------------------------------------------------
 % Page numbering - PERBAIKAN
 %------------------------------------------------
